@@ -1,15 +1,37 @@
 package com.fn.demo.test;
 
+import android.content.Context;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
 import com.fn.demo.R;
 import com.fn.demo.base.BaseActivity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import lib.core.annotation.inject.ViewInject;
 import lib.core.bean.TitleBar;
+import lib.core.utils.ExToastUtil;
 
 /**
  * Created by yayun.xia on 2017/6/12.
  */
 
-public class DataBaseActivity extends BaseActivity {
+public class DataBaseActivity extends BaseActivity implements View.OnClickListener{
+    @ViewInject(R.id.btn_save)
+    private Button btnSave;
+    @ViewInject(R.id.btn_read)
+    private Button btnRead;
+    @ViewInject(R.id.edt_date)
+    private EditText editText;
     /**
      * Method_初始化布局 ：对展示布局进行设置
      *
@@ -26,6 +48,8 @@ public class DataBaseActivity extends BaseActivity {
     @Override
     protected void exInitView() {
         super.exInitView();
+        btnSave.setOnClickListener(this);
+        btnRead.setOnClickListener(this);
     }
 
     /**
@@ -37,5 +61,88 @@ public class DataBaseActivity extends BaseActivity {
     protected void exInitToolbar(TitleBar toolbar) {
         super.exInitToolbar(toolbar);
         toolbar.setTitle("数据库测试");
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.btn_save:
+                save();
+                break;
+            case R.id.btn_read:
+                ExToastUtil.showLong(load());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void save(){
+
+        String data = "Data to save";
+        if(editText.getText() != null){
+            data = editText.getText().toString();
+        }
+
+        FileOutputStream out = null;
+        BufferedWriter writer = null;
+        try {
+            out = openFileOutput("data", Context.MODE_PRIVATE);
+            writer = new BufferedWriter(new OutputStreamWriter(out));
+            writer.write(data);
+            ExToastUtil.showLong("保存成功！");
+            editText.getText().clear();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            ExToastUtil.showLong("保存失败！"+e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            ExToastUtil.showLong("保存失败！"+e.toString());
+        } finally {
+            try {
+                if(writer != null){
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                ExToastUtil.showLong("异常！"+e.toString());
+            }
+        }
+    }
+
+    private String load(){
+        FileInputStream in = null;
+        BufferedReader reader = null;
+        StringBuilder content = new StringBuilder();
+        try{
+            in = openFileInput("data");
+            reader = new BufferedReader(new InputStreamReader(in));
+            String line = "";
+            while ((line = reader.readLine()) != null){
+                content.append(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return content.toString();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        save();
     }
 }
