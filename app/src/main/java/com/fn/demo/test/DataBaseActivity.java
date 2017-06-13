@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.fn.demo.R;
 import com.fn.demo.base.BaseActivity;
+import com.fn.demo.db.SharePreferenceHelper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,6 +33,25 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
     private Button btnRead;
     @ViewInject(R.id.edt_date)
     private EditText editText;
+    @ViewInject(R.id.edt_user)
+    private EditText edtUser;
+    @ViewInject(R.id.edt_pwd)
+    private EditText edtPwd;
+    @ViewInject(R.id.btn_sp_save)
+    private Button btnSpSave;
+    @ViewInject(R.id.btn_sp_read)
+    private Button btnSpRead;
+    @ViewInject(R.id.btn_db_create)
+    private Button btnDbCreate;
+    @ViewInject(R.id.btn_db_add)
+    private Button btnDbAdd;
+    @ViewInject(R.id.btn_db_update)
+    private Button btnDbUpdate;
+    @ViewInject(R.id.btn_db_del)
+    private Button btnDbDel;
+    @ViewInject(R.id.btn_db_query)
+    private Button btnDbQurey;
+
     /**
      * Method_初始化布局 ：对展示布局进行设置
      *
@@ -48,8 +68,18 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void exInitView() {
         super.exInitView();
+
         btnSave.setOnClickListener(this);
         btnRead.setOnClickListener(this);
+
+        btnSpRead.setOnClickListener(this);
+        btnSpSave.setOnClickListener(this);
+
+        btnDbCreate.setOnClickListener(this);
+        btnDbAdd.setOnClickListener(this);
+        btnDbUpdate.setOnClickListener(this);
+        btnDbDel.setOnClickListener(this);
+        btnDbQurey.setOnClickListener(this);
     }
 
     /**
@@ -74,6 +104,26 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_read:
                 ExToastUtil.showLong(load());
                 break;
+            case R.id.btn_sp_save:
+                SharePreferenceHelper.getInstance().putString("username",edtUser.getText().toString());
+                SharePreferenceHelper.getInstance().putString("pwd",edtPwd.getText().toString());
+                ExToastUtil.showLong("保存成功！");
+                break;
+            case R.id.btn_sp_read:
+                ExToastUtil.showLong("user:"+SharePreferenceHelper.getInstance().getString("username")+
+                                      "\n"+"pwd:"+SharePreferenceHelper.getInstance().getString("pwd"));
+                break;
+            case R.id.btn_db_create:
+                break;
+            case R.id.btn_db_add:
+                break;
+            case R.id.btn_db_update:
+                break;
+            case R.id.btn_db_del:
+                break;
+            case R.id.btn_db_query:
+                break;
+
             default:
                 break;
         }

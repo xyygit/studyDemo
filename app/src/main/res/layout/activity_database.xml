@@ -1,34 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <EditText
-        android:id="@+id/edt_date"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@null"
-        android:hint="please input test data!"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_line"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="文件存储 save"/>
+        <EditText
+            android:id="@+id/edt_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="please input 文件存储数据!"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_line"/>
 
-    <Button
-        android:id="@+id/btn_read"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="文件存储 read"/>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="文件存储 save"/>
+
+        <Button
+            android:id="@+id/btn_read"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="文件存储 read"/>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="用户名："/>
 
+            <EditText
+                android:id="@+id/edt_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="please input username!"/>
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="密    码："/>
+            <EditText
+                android:id="@+id/edt_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="please input username!"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_sp_save"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="sharepreference save"/>
+
+        <Button
+            android:id="@+id/btn_sp_read"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="sharepreference read"/>
+
+        <Button
+            android:id="@+id/btn_db_create"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="database Create"/>
+
+        <Button
+            android:id="@+id/btn_db_add"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="add data"/>
+
+        <Button
+            android:id="@+id/btn_db_update"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="update data"/>
+
+        <Button
+            android:id="@+id/btn_db_del"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="del data"/>
+
+        <Button
+            android:id="@+id/btn_db_query"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="query data"/>
+
+    </LinearLayout>
+</ScrollView>
