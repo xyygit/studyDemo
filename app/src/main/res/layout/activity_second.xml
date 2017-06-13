@@ -17,4 +17,12 @@
         android:layout_height="60dp"
         android:text="goto ThirdActivity" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textColor="@color/color_white"
+        android:text="这是一个singleInstance启动模式的activity"/>
+
 </RelativeLayout>

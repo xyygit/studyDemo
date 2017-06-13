@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.fn.demo.R;
 import com.fn.demo.base.BaseActivity;
+import com.fn.demo.db.MyDatabaseHelper;
 import com.fn.demo.db.SharePreferenceHelper;
 
 import java.io.BufferedReader;
@@ -52,6 +53,9 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
     @ViewInject(R.id.btn_db_query)
     private Button btnDbQurey;
 
+    private MyDatabaseHelper dbHelper;
+    private String dbBook = "BookStore.db";
+
     /**
      * Method_初始化布局 ：对展示布局进行设置
      *
@@ -80,6 +84,8 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
         btnDbUpdate.setOnClickListener(this);
         btnDbDel.setOnClickListener(this);
         btnDbQurey.setOnClickListener(this);
+
+        dbHelper = new MyDatabaseHelper(this,dbBook,null,1);
     }
 
     /**
@@ -114,6 +120,7 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
                                       "\n"+"pwd:"+SharePreferenceHelper.getInstance().getString("pwd"));
                 break;
             case R.id.btn_db_create:
+                dbHelper.getWritableDatabase();
                 break;
             case R.id.btn_db_add:
                 break;

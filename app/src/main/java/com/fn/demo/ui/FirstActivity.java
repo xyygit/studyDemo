@@ -35,13 +35,6 @@ public class FirstActivity extends BaseActivity {
             }
         });
 
-        findViewById(R.id.btn_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FirstActivity.this,ThirdActivity.class));
-            }
-        });
-
         ExLogUtil.d("FirstActivity -----> Task id is: "+getTaskId());
     }
 
