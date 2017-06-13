@@ -1,6 +1,8 @@
 package com.fn.demo.test;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,8 +86,7 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
         btnDbUpdate.setOnClickListener(this);
         btnDbDel.setOnClickListener(this);
         btnDbQurey.setOnClickListener(this);
-
-        dbHelper = new MyDatabaseHelper(this,dbBook,null,1);
+        dbHelper = new MyDatabaseHelper(this,dbBook,null,2);
     }
 
     /**
@@ -120,11 +121,31 @@ public class DataBaseActivity extends BaseActivity implements View.OnClickListen
                                       "\n"+"pwd:"+SharePreferenceHelper.getInstance().getString("pwd"));
                 break;
             case R.id.btn_db_create:
+                if(dbHelper == null){
+                    dbHelper = new MyDatabaseHelper(this,dbBook,null,1);
+                }
                 dbHelper.getWritableDatabase();
                 break;
             case R.id.btn_db_add:
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                //开始组装第一条数据
+                values.put("name","The sajjs ssss");
+                values.put("author","tomsth.lee");
+                values.put("pages",454);
+                values.put("price",16.95);
+                db.insert("Book",null,values);//插入第一条数据
+                //开始组装第二条数据
+                values.clear();
+                values.put("name","A dog lovely");
+                values.put("author","Anny");
+                values.put("pages",121);
+                values.put("price",34.5);
+                db.insert("Book",null,values);//插入第二条数据
                 break;
             case R.id.btn_db_update:
+                dbHelper = new MyDatabaseHelper(this,dbBook,null,2);
+                dbHelper.getWritableDatabase();
                 break;
             case R.id.btn_db_del:
                 break;
